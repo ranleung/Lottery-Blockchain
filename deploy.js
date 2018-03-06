@@ -1,7 +1,7 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const keys = require('./keys');
-const { interface, bytecode } = require('./complie');
+const { interface, bytecode } = require('./compile');
 
 const provider = new HDWalletProvider(
   keys.Mnemonic,
@@ -9,7 +9,6 @@ const provider = new HDWalletProvider(
 );
 
 const web3 = new Web3(provider);
-const INITIAL_STRING='Hi there!';
 
 const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
@@ -20,6 +19,7 @@ const deploy = async () => {
   .deploy({ data: bytecode })
   .send({ from: accounts[0], gas: 1000000})
 
+  console.log(interface);
   console.log('Contract deployed to', result.options.address);
 };
 
